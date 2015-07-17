@@ -104,7 +104,7 @@ void loop()
                     digitalWrite(13, 1);
         }
 
-        if (stick=='0'){
+        if (stick=='0'||stick=='5'){
                     digitalWrite(7,1);
                     digitalWrite(6,1);
                     digitalWrite(5,1);
