@@ -4,6 +4,7 @@ SoftwareSerial mySerial(10,9); // RX, TX
 const int trigPin = 12;
 const int echoPin = 13;
 int stick='0';
+bool flag=false;
 
 void setup()
 {
@@ -56,16 +57,19 @@ void loop()
         
         if (SincomingByte>=(int)'0' && SincomingByte<=(int)'9'){
           stick=SincomingByte;
-       mySerial.println((char)SincomingByte);
+
+
         }
        
         else if (SincomingByte==(int)'r'){}
-        else   mySerial.println('-');
-        
-        if (cm<40&&stick<4 &&stick>0)stick+=3;
-        if (SincomingByte=='r'){
+        else   {
+          mySerial.print((char)SincomingByte);
+          mySerial.println('-');
+        }
+        if (cm<40&&stick<(int)'4' &&stick>(int)'0'){flag=true;stick+=3;}
+        if ((SincomingByte=='r')||(SincomingByte>=(int)'0' && SincomingByte<=(int)'9')){
           mySerial.print((char)stick);
-          mySerial.print("%");
+          mySerial.print("|");
           mySerial.println(cm);
         }
         if (stick=='1'){
@@ -140,6 +144,7 @@ void loop()
                     digitalWrite(13, 1);
         }
 
+        if (flag){stick-=3;flag=false;}
         
    
         
