@@ -5,18 +5,17 @@ const int trigPin = 12;
 const int echoPin = 13;
 int stick='0';
 bool flag=false;
+int dd=200;
 
 void setup()
 {
   mySerial.begin(9600);
   Serial.begin(9600);
-  pinMode(13, OUTPUT);
   pinMode(7, OUTPUT);
   pinMode(6, OUTPUT);
   pinMode(5, OUTPUT);
   pinMode(4, OUTPUT);
   
-  digitalWrite(13, 0);
   digitalWrite(7, 1);
   digitalWrite(6, 1);
   digitalWrite(5, 1);
@@ -67,41 +66,29 @@ void loop()
           mySerial.println('-');
         }
         if (cm<40&&stick<(int)'4' &&stick>(int)'0'){flag=true;stick+=3;}
-        if ((SincomingByte=='r')||(SincomingByte>=(int)'0' && SincomingByte<=(int)'9')){
+        if ((stick=='r')||(stick>=(int)'0' && stick<=(int)'9')){
           mySerial.print((char)stick);
           mySerial.print("|");
           mySerial.println(cm);
-        }
+        
         if (stick=='1'){
-                    digitalWrite(7,1);
-                    digitalWrite(6,0);
                     digitalWrite(5,0);
-                    digitalWrite(4,1);
-                    digitalWrite(13, 1);
+                    digitalWrite(6,0);
+    
         }
 
         if (stick=='2'){
-                    digitalWrite(7,1);
                     digitalWrite(6,0);
-                    digitalWrite(5,1);
-                    digitalWrite(4,1);
-                    digitalWrite(13, 1);
         }
 
         if (stick=='3'){
-                    digitalWrite(7,1);
-                    digitalWrite(6,0);
-                    digitalWrite(5,1);
                     digitalWrite(4,0);
-                    digitalWrite(13, 1);
+                    digitalWrite(6,0);
         }
 
         if (stick=='4'){
-                     digitalWrite(7,1);
-                    digitalWrite(6,1);
                     digitalWrite(5,0);
-                    digitalWrite(4,1);
-                    digitalWrite(13, 1);
+                    
         }
 
         if (stick=='0'||stick=='5'){
@@ -109,49 +96,36 @@ void loop()
                     digitalWrite(6,1);
                     digitalWrite(5,1);
                     digitalWrite(4,1);
-                    digitalWrite(13, 0);
         }
 
         if (stick=='6'){
-                    digitalWrite(7,1);
-                    digitalWrite(6,1);
-                    digitalWrite(5,1);
                     digitalWrite(4,0);
-                    digitalWrite(13, 1);
         }
 
         if (stick=='7'){
-                    digitalWrite(7,0);
-                    digitalWrite(6,1);
                     digitalWrite(5,0);
-                    digitalWrite(4,1);
-                    digitalWrite(13, 1);
+                    digitalWrite(7,0);
         }
 
         if (stick=='8'){
                     digitalWrite(7,0);
-                    digitalWrite(6,1);
-                    digitalWrite(5,1);
-                    digitalWrite(4,1);
-                    digitalWrite(13, 1);
         }
 
         if (stick=='9'){
-                    digitalWrite(7,0);
-                    digitalWrite(6,1);
-                    digitalWrite(5,1);
                     digitalWrite(4,0);
-                    digitalWrite(13, 1);
+                    digitalWrite(7,0);
         }
 
         if (flag){stick-=3;flag=false;}
-        
-   
-        
-
-               
+        delay(dd);
+        digitalWrite(7,1);
+        digitalWrite(6,1);
+        digitalWrite(5,1);
+        digitalWrite(4,1);
+        stick='0';
         }
-        //delay(1);
+        
+        }
         
 }
 
@@ -172,3 +146,14 @@ long microsecondsToCentimeters(long microseconds)
   // object we take half of the distance travelled.
   return microseconds / 29 / 2;
 }
+
+
+
+
+
+
+
+
+
+
+
