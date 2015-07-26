@@ -26,6 +26,8 @@ public class Serial {
 			final OutputStream socketOutputStream = socket.getOutputStream();
 
 			new Thread(new Runnable() {
+				private String last;
+
 				public void run() {
 					String line = "";
 					try {
@@ -34,8 +36,10 @@ public class Serial {
 						String input;
 
 						while ((input = br.readLine()) != null) {
-							if (!input.startsWith("r"))
+//							if (!input.startsWith("r"))
 								//input += "5";
+							if (input.equals("")){input=last;}
+							else last=input;
 
 							// System.out.println(input);
 							for (int i = 0; i < input.length(); i++) {
@@ -109,9 +113,9 @@ public class Serial {
 				try {
 					socket = new Socket("192.168.111.129", 81);
 				} catch (UnknownHostException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				} catch (IOException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				if (socket != null) {
 					System.out.println("sock opened");

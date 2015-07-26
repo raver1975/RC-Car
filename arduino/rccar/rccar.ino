@@ -6,6 +6,7 @@ const int echoPin = 13;
 int stick='0';
 bool flag=false;
 int dd=200;
+long duration, inches, cm;
 
 void setup()
 {
@@ -27,8 +28,8 @@ void setup()
  
 void loop()
 {
-  if (mySerial.available() > 0) {
-    long duration, inches, cm;
+  //if (!mySerial.available()) {
+    
  
   // The sensor is triggered by a HIGH pulse of 10 or more microseconds.
   // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
@@ -49,32 +50,33 @@ void loop()
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
                 // read the incoming byte:
-  SincomingByte = mySerial.read();
-               
-
-
-        
+  // }
+  //else{
+   
+  if (mySerial.available()){
+        SincomingByte = mySerial.read();         
         if (SincomingByte>=(int)'0' && SincomingByte<=(int)'9'){
           stick=SincomingByte;
-
-
         }
+
        
-        else if (SincomingByte==(int)'r'){}
+  
         else   {
+        SincomingByte=-1;
           mySerial.print((char)SincomingByte);
           mySerial.println('-');
         }
+ }
+        if ((stick>=(int)'1' && stick<=(int)'9')){
         if (cm<40&&stick<(int)'4' &&stick>(int)'0'){flag=true;stick+=3;}
-        if ((stick=='r')||(stick>=(int)'0' && stick<=(int)'9')){
+ 
           mySerial.print((char)stick);
           mySerial.print("|");
           mySerial.println(cm);
         
         if (stick=='1'){
+                  digitalWrite(6,0);
                     digitalWrite(5,0);
-                    digitalWrite(6,0);
-    
         }
 
         if (stick=='2'){
@@ -82,8 +84,9 @@ void loop()
         }
 
         if (stick=='3'){
+              digitalWrite(6,0);
                     digitalWrite(4,0);
-                    digitalWrite(6,0);
+                    
         }
 
         if (stick=='4'){
@@ -118,12 +121,12 @@ void loop()
 
         if (flag){stick-=3;flag=false;}
         delay(dd);
-        digitalWrite(7,1);
-        digitalWrite(6,1);
-        digitalWrite(5,1);
-        digitalWrite(4,1);
-        stick='0';
-        }
+       digitalWrite(7,1);
+   digitalWrite(6,1);
+   digitalWrite(5,1);
+   digitalWrite(4,1);
+   stick='0';
+        //}
         
         }
         
@@ -146,6 +149,19 @@ long microsecondsToCentimeters(long microseconds)
   // object we take half of the distance travelled.
   return microseconds / 29 / 2;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
