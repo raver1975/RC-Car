@@ -17,7 +17,7 @@ public class Serial {
 			Socket socket = null;
 
 			System.out.print("opening socket ");
-			socket = new Socket("192.168.111.129", 81);
+			socket = new Socket("192.168.0.15", 81);
 			System.out.println("sock opened");
 			// socket.close();
 			// if (true)continue;
@@ -26,7 +26,7 @@ public class Serial {
 			final OutputStream socketOutputStream = socket.getOutputStream();
 
 			new Thread(new Runnable() {
-				private String last;
+				private String last="0";
 
 				public void run() {
 					String line = "";
@@ -38,7 +38,7 @@ public class Serial {
 						while ((input = br.readLine()) != null) {
 //							if (!input.startsWith("r"))
 								//input += "5";
-							if (input.equals("")){input=last;}
+							if (input==null||input.isEmpty()||input.equals("")){input=last;}
 							else last=input;
 
 							// System.out.println(input);

@@ -13,6 +13,8 @@ long duration2, cm2;
 int stick='0';
 int dd=200;
 
+boolean autopilot=false;
+
 void setup()
 {
   mySerial.begin(9600);
@@ -53,14 +55,18 @@ void loop()
   duration2 = pulseIn(echoPin2, HIGH);
   cm2 = microsecondsToCentimeters(duration2);
  
-
+        delay(dd);
+       
+        stick='0';
   
   if (mySerial.available()){
   
+
       SincomingByte = mySerial.read();         
       if (SincomingByte>=(int)'0' && SincomingByte<=(int)'9'){
           stick=SincomingByte;
       }
+      if (SincomingByte=='a'){autopilot=!autopilot;mySerial.print("auto=");mySerial.println(autopilot);}
       else   {
           SincomingByte=-1;
           mySerial.print((char)SincomingByte);
@@ -71,14 +77,26 @@ void loop()
       digitalWrite(6,1);
       digitalWrite(5,1);
       digitalWrite(4,1);
-      
-  if ((stick>=(int)'1' && stick<=(int)'9')){
-      //if (cm<40&&stick<(int)'4' &&stick>(int)'0'){flag=true;stick+=3;}
+      delay(dd*2);
+
+
+if (autopilot&&cm1!=0&&cm2!=0){
+  stick='8';
+  if (cm1<50)stick='9';
+  if (cm2<50)stick='7';
+  if (cm1>50 && cm2>50)stick='2';
+  if (cm1>50 && cm2<50)stick='3';
+  if (cm1<50 && cm1>50)stick='1';
+  }
         mySerial.print((char)stick);
         mySerial.print("|");
         mySerial.print(cm1);
         mySerial.print(",");
         mySerial.println(cm2);
+      
+  if ((stick>=(int)'1' && stick<=(int)'9')){
+      //if (cm<40&&stick<(int)'4' &&stick>(int)'0'){flag=true;stick+=3;}
+    
         
         if (stick=='1'){
                     digitalWrite(6,0);
@@ -126,9 +144,7 @@ void loop()
         }
 
         //if (flag){stick-=3;flag=false;}
-        delay(dd);
-       
-        stick='0';
+
     }
         
 }
