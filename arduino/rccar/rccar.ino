@@ -1,4 +1,22 @@
 #include <SoftwareSerial.h>
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+
+// Which pin on the Arduino is connected to the NeoPixels?
+// On a Trinket or Gemma we suggest changing this to 1
+#define PIN            2
+
+// How many NeoPixels are attached to the Arduino?
+#define NUMPIXELS      64
+
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+// Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
+// example for more information on possible values.
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+
 int SincomingByte = 0;
 SoftwareSerial mySerial(10,9); // RX, TX
 
@@ -11,12 +29,18 @@ const int echoPin2 = 11;
 long duration2, cm2;
 
 int stick='0';
-int dd=200;
+int dd=300;
 
 boolean autopilot=false;
 
 void setup()
 {
+  pixels.begin();
+   
+   for(int i=0;i<NUMPIXELS;i++){
+    pixels.setPixelColor(i, pixels.Color(0,0,0)); // Moderately bright green color.
+   }
+   pixels.show();
   mySerial.begin(9600);
   Serial.begin(9600);
   pinMode(7, OUTPUT);
@@ -55,18 +79,36 @@ void loop()
   duration2 = pulseIn(echoPin2, HIGH);
   cm2 = microsecondsToCentimeters(duration2);
  
-        delay(dd);
+   for(int i=0;i<cm1/30;i++){
+    pixels.setPixelColor(i, pixels.Color(0,150,0)); // Moderately bright green color.
+   }
+   for(int i=0;i<cm2/30;i++){
+    pixels.setPixelColor(i+56, pixels.Color(0,150,0)); // Moderately bright green color.
+   }
+   for(int i=cm1/30;i<9;i++){
+    pixels.setPixelColor(i, pixels.Color(0,0,0)); // Moderately bright green color.
+   }
+   for(int i=cm2/30;i<9;i++){
+    pixels.setPixelColor(i+56, pixels.Color(0,0,0)); // Moderately bright green color.
+   }
+    pixels.show(); // This sends the updated pixel color to the hardware.
+
+    //delay(delayval); // Delay for a period of time (in milliseconds).
+
+  //}
+        
        
         stick='0';
   
   if (mySerial.available()){
   
 
-      SincomingByte = mySerial.read();         
+      SincomingByte = mySerial.read();      
+            if (SincomingByte=='a'){autopilot=!autopilot;mySerial.print("auto=");mySerial.println(autopilot);}   
       if (SincomingByte>=(int)'0' && SincomingByte<=(int)'9'){
           stick=SincomingByte;
       }
-      if (SincomingByte=='a'){autopilot=!autopilot;mySerial.print("auto=");mySerial.println(autopilot);}
+
       else   {
           SincomingByte=-1;
           mySerial.print((char)SincomingByte);
@@ -77,7 +119,7 @@ void loop()
       digitalWrite(6,1);
       digitalWrite(5,1);
       digitalWrite(4,1);
-      delay(dd*2);
+      delay(dd);
 
 
 if (autopilot&&cm1!=0&&cm2!=0){
@@ -142,7 +184,7 @@ if (autopilot&&cm1!=0&&cm2!=0){
                     digitalWrite(4,0);
                     digitalWrite(7,0);
         }
-
+        delay(dd);
         //if (flag){stick-=3;flag=false;}
 
     }
