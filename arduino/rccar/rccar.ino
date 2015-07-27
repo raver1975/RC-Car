@@ -56,7 +56,7 @@ void setup()
   mySerial.println("MySerial Ready");
 for (int j=0;j<2;j++){
 //  for(int i=0;i<64;i++){
-//    pixels.setPixelColor(i, pixels.Color(255,0,0)); // Moderately bright green color.
+//    pixels.setPixelColor(i, pixels.Color(150,0,0)); // Moderately bright green color.
 //  }
 //  pixels.show();
 //  delay(100);
@@ -83,68 +83,68 @@ for (int j=0;j<2;j++){
              pixels.setPixelColor(i, pixels.Color(0,0,0));
          }
          if (stick=='1'){
-                    pixels.setPixelColor(45, pixels.Color(255,0,0));
-                    pixels.setPixelColor(46, pixels.Color(255,0,0));
-                    pixels.setPixelColor(53, pixels.Color(255,0,0));
-                    pixels.setPixelColor(54, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(45, pixels.Color(150,0,0));
+                    pixels.setPixelColor(46, pixels.Color(150,0,0));
+                    pixels.setPixelColor(53, pixels.Color(150,0,0));
+                    pixels.setPixelColor(54, pixels.Color(150,0,0));            
         }
 
         if (stick=='2'){
-                    pixels.setPixelColor(29, pixels.Color(255,0,0));
-                    pixels.setPixelColor(30, pixels.Color(255,0,0));
-                    pixels.setPixelColor(37, pixels.Color(255,0,0));
-                    pixels.setPixelColor(38, pixels.Color(255,0,0));           
+                    pixels.setPixelColor(29, pixels.Color(150,0,0));
+                    pixels.setPixelColor(30, pixels.Color(150,0,0));
+                    pixels.setPixelColor(37, pixels.Color(150,0,0));
+                    pixels.setPixelColor(38, pixels.Color(150,0,0));           
         }
 
         if (stick=='3'){
-                    pixels.setPixelColor(13, pixels.Color(255,0,0));
-                    pixels.setPixelColor(14, pixels.Color(255,0,0));
-                    pixels.setPixelColor(21, pixels.Color(255,0,0));
-                    pixels.setPixelColor(22, pixels.Color(255,0,0));        
+                    pixels.setPixelColor(13, pixels.Color(150,0,0));
+                    pixels.setPixelColor(14, pixels.Color(150,0,0));
+                    pixels.setPixelColor(21, pixels.Color(150,0,0));
+                    pixels.setPixelColor(22, pixels.Color(150,0,0));        
                     
         }
 
         if (stick=='4'){
-                    pixels.setPixelColor(43, pixels.Color(255,0,0));
-                    pixels.setPixelColor(44, pixels.Color(255,0,0));
-                    pixels.setPixelColor(51, pixels.Color(255,0,0));
-                    pixels.setPixelColor(52, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(43, pixels.Color(150,0,0));
+                    pixels.setPixelColor(44, pixels.Color(150,0,0));
+                    pixels.setPixelColor(51, pixels.Color(150,0,0));
+                    pixels.setPixelColor(52, pixels.Color(150,0,0));            
                     
         }
 
         if (stick=='0'||stick=='5'){
-                    pixels.setPixelColor(27, pixels.Color(255,0,0));
-                    pixels.setPixelColor(28, pixels.Color(255,0,0));
-                    pixels.setPixelColor(35, pixels.Color(255,0,0));
-                    pixels.setPixelColor(36, pixels.Color(255,0,0));          
+                    pixels.setPixelColor(27, pixels.Color(150,0,0));
+                    pixels.setPixelColor(28, pixels.Color(150,0,0));
+                    pixels.setPixelColor(35, pixels.Color(150,0,0));
+                    pixels.setPixelColor(36, pixels.Color(150,0,0));          
         }
 
         if (stick=='6'){
-                    pixels.setPixelColor(11, pixels.Color(255,0,0));
-                    pixels.setPixelColor(12, pixels.Color(255,0,0));
-                    pixels.setPixelColor(19, pixels.Color(255,0,0));
-                    pixels.setPixelColor(20, pixels.Color(255,0,0));           
+                    pixels.setPixelColor(11, pixels.Color(150,0,0));
+                    pixels.setPixelColor(12, pixels.Color(150,0,0));
+                    pixels.setPixelColor(19, pixels.Color(150,0,0));
+                    pixels.setPixelColor(20, pixels.Color(150,0,0));           
         }
 
         if (stick=='7'){
-                    pixels.setPixelColor(41, pixels.Color(255,0,0));
-                    pixels.setPixelColor(42, pixels.Color(255,0,0));
-                    pixels.setPixelColor(49, pixels.Color(255,0,0));
-                    pixels.setPixelColor(50, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(41, pixels.Color(150,0,0));
+                    pixels.setPixelColor(42, pixels.Color(150,0,0));
+                    pixels.setPixelColor(49, pixels.Color(150,0,0));
+                    pixels.setPixelColor(50, pixels.Color(150,0,0));            
         }
 
         if (stick=='8'){
-                    pixels.setPixelColor(25, pixels.Color(255,0,0));
-                    pixels.setPixelColor(26, pixels.Color(255,0,0));
-                    pixels.setPixelColor(33, pixels.Color(255,0,0));
-                    pixels.setPixelColor(34, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(25, pixels.Color(150,0,0));
+                    pixels.setPixelColor(26, pixels.Color(150,0,0));
+                    pixels.setPixelColor(33, pixels.Color(150,0,0));
+                    pixels.setPixelColor(34, pixels.Color(150,0,0));            
         }
 
         if (stick=='9'){
-                    pixels.setPixelColor(9, pixels.Color(255,0,0));
-                    pixels.setPixelColor(10, pixels.Color(255,0,0));
-                    pixels.setPixelColor(17, pixels.Color(255,0,0));
-                    pixels.setPixelColor(18, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(9, pixels.Color(150,0,0));
+                    pixels.setPixelColor(10, pixels.Color(150,0,0));
+                    pixels.setPixelColor(17, pixels.Color(150,0,0));
+                    pixels.setPixelColor(18, pixels.Color(150,0,0));            
         }
         pixels.show();
         delay(100);
@@ -177,10 +177,10 @@ void loop()
   duration2 = pulseIn(echoPin2, HIGH);
   cm2 = microsecondsToCentimeters(duration2);
  
-   for(int i=0;i<cm1/30;i++){
+   for(int i=0;i<cm1/30&&i<9;i++){
     pixels.setPixelColor(i, pixels.Color(0,150,0)); // Moderately bright green color.
    }
-   for(int i=0;i<cm2/30;i++){
+   for(int i=0;i<cm2/30&&i<9;i++){
     pixels.setPixelColor(i+56, pixels.Color(0,150,0)); // Moderately bright green color.
    }
    for(int i=cm1/30;i<9;i++){
@@ -189,6 +189,8 @@ void loop()
    for(int i=cm2/30;i<9;i++){
     pixels.setPixelColor(i+56, pixels.Color(0,0,0)); // Moderately bright green color.
    }
+   if (cm1/30<9)pixels.setPixelColor(cm1/30,pixels.Color(0,0,150));
+   if (cm2/30<9)pixels.setPixelColor(cm2/30+56,pixels.Color(0,0,150));
     pixels.show(); // This sends the updated pixel color to the hardware.
 
     //delay(delayval); // Delay for a period of time (in milliseconds).
@@ -243,36 +245,36 @@ if (autopilot&&cm1!=0&&cm2!=0){
         if (stick=='1'){
                     digitalWrite(6,0);
                     digitalWrite(5,0);
-                    pixels.setPixelColor(45, pixels.Color(255,0,0));
-                    pixels.setPixelColor(46, pixels.Color(255,0,0));
-                    pixels.setPixelColor(53, pixels.Color(255,0,0));
-                    pixels.setPixelColor(54, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(45, pixels.Color(0,150,0));
+                    pixels.setPixelColor(46, pixels.Color(0,150,0));
+                    pixels.setPixelColor(53, pixels.Color(0,150,0));
+                    pixels.setPixelColor(54, pixels.Color(0,150,0));            
         }
 
         if (stick=='2'){
                     digitalWrite(6,0);
-                    pixels.setPixelColor(29, pixels.Color(255,0,0));
-                    pixels.setPixelColor(30, pixels.Color(255,0,0));
-                    pixels.setPixelColor(37, pixels.Color(255,0,0));
-                    pixels.setPixelColor(38, pixels.Color(255,0,0));           
+                    pixels.setPixelColor(29, pixels.Color(0,150,0));
+                    pixels.setPixelColor(30, pixels.Color(0,150,0));
+                    pixels.setPixelColor(37, pixels.Color(0,150,0));
+                    pixels.setPixelColor(38, pixels.Color(0,150,0));           
         }
 
         if (stick=='3'){
                     digitalWrite(6,0);
                     digitalWrite(4,0);
-                    pixels.setPixelColor(13, pixels.Color(255,0,0));
-                    pixels.setPixelColor(14, pixels.Color(255,0,0));
-                    pixels.setPixelColor(21, pixels.Color(255,0,0));
-                    pixels.setPixelColor(22, pixels.Color(255,0,0));        
+                    pixels.setPixelColor(13, pixels.Color(0,150,0));
+                    pixels.setPixelColor(14, pixels.Color(0,150,0));
+                    pixels.setPixelColor(21, pixels.Color(0,150,0));
+                    pixels.setPixelColor(22, pixels.Color(0,150,0));        
                     
         }
 
         if (stick=='4'){
                     digitalWrite(5,0);
-                    pixels.setPixelColor(43, pixels.Color(255,0,0));
-                    pixels.setPixelColor(44, pixels.Color(255,0,0));
-                    pixels.setPixelColor(51, pixels.Color(255,0,0));
-                    pixels.setPixelColor(52, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(43, pixels.Color(100,100,0));
+                    pixels.setPixelColor(44, pixels.Color(100,100,0));
+                    pixels.setPixelColor(51, pixels.Color(100,100,0));
+                    pixels.setPixelColor(52, pixels.Color(100,100,0));            
                     
         }
 
@@ -281,44 +283,44 @@ if (autopilot&&cm1!=0&&cm2!=0){
                     digitalWrite(6,1);
                     digitalWrite(5,1);
                     digitalWrite(4,1);
-                    pixels.setPixelColor(27, pixels.Color(255,0,0));
-                    pixels.setPixelColor(28, pixels.Color(255,0,0));
-                    pixels.setPixelColor(35, pixels.Color(255,0,0));
-                    pixels.setPixelColor(36, pixels.Color(255,0,0));          
+                    pixels.setPixelColor(27, pixels.Color(150,0,0));
+                    pixels.setPixelColor(28, pixels.Color(150,0,0));
+                    pixels.setPixelColor(35, pixels.Color(150,0,0));
+                    pixels.setPixelColor(36, pixels.Color(150,0,0));          
         }
 
         if (stick=='6'){
                     digitalWrite(4,0);
-                    pixels.setPixelColor(11, pixels.Color(255,0,0));
-                    pixels.setPixelColor(12, pixels.Color(255,0,0));
-                    pixels.setPixelColor(19, pixels.Color(255,0,0));
-                    pixels.setPixelColor(20, pixels.Color(255,0,0));           
+                    pixels.setPixelColor(11, pixels.Color(100,100,0));
+                    pixels.setPixelColor(12, pixels.Color(100,100,0));
+                    pixels.setPixelColor(19, pixels.Color(100,100,0));
+                    pixels.setPixelColor(20, pixels.Color(100,100,0));           
         }
 
         if (stick=='7'){
                     digitalWrite(5,0);
                     digitalWrite(7,0);
-                    pixels.setPixelColor(41, pixels.Color(255,0,0));
-                    pixels.setPixelColor(42, pixels.Color(255,0,0));
-                    pixels.setPixelColor(49, pixels.Color(255,0,0));
-                    pixels.setPixelColor(50, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(41, pixels.Color(0,0,150));
+                    pixels.setPixelColor(42, pixels.Color(0,0,150));
+                    pixels.setPixelColor(49, pixels.Color(0,0,150));
+                    pixels.setPixelColor(50, pixels.Color(0,0,150));            
         }
 
         if (stick=='8'){
                     digitalWrite(7,0);
-                    pixels.setPixelColor(25, pixels.Color(255,0,0));
-                    pixels.setPixelColor(26, pixels.Color(255,0,0));
-                    pixels.setPixelColor(33, pixels.Color(255,0,0));
-                    pixels.setPixelColor(34, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(25, pixels.Color(0,0,150));
+                    pixels.setPixelColor(26, pixels.Color(0,0,150));
+                    pixels.setPixelColor(33, pixels.Color(0,0,150));
+                    pixels.setPixelColor(34, pixels.Color(0,0,150));            
         }
 
         if (stick=='9'){
                     digitalWrite(4,0);
                     digitalWrite(7,0);
-                    pixels.setPixelColor(9, pixels.Color(255,0,0));
-                    pixels.setPixelColor(10, pixels.Color(255,0,0));
-                    pixels.setPixelColor(17, pixels.Color(255,0,0));
-                    pixels.setPixelColor(18, pixels.Color(255,0,0));            
+                    pixels.setPixelColor(9, pixels.Color(0,0,150));
+                    pixels.setPixelColor(10, pixels.Color(0,0,150));
+                    pixels.setPixelColor(17, pixels.Color(0,0,150));
+                    pixels.setPixelColor(18, pixels.Color(0,0,150));            
         }
         delay(dd);
         //if (flag){stick-=3;flag=false;}
