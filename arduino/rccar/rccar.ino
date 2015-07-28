@@ -29,9 +29,9 @@ const int echoPin2 = 11;
 long duration2, cm2;
 
 int stick='0';
-int dd=300;
+int dd=400;
 
-boolean autopilot=false;
+boolean autopilot=true;
 
 void setup()
 {
@@ -54,7 +54,7 @@ void setup()
   digitalWrite(4, 1);
   Serial.println("Ready");
   mySerial.println("MySerial Ready");
-for (int j=0;j<2;j++){
+for (int j=0;j<1;j++){
 //  for(int i=0;i<64;i++){
 //    pixels.setPixelColor(i, pixels.Color(150,0,0)); // Moderately bright green color.
 //  }
@@ -147,7 +147,7 @@ for (int j=0;j<2;j++){
                     pixels.setPixelColor(18, pixels.Color(150,0,0));            
         }
         pixels.show();
-        delay(100);
+        if(autopilot)delay(dd);
   }
 }
 
@@ -177,20 +177,20 @@ void loop()
   duration2 = pulseIn(echoPin2, HIGH);
   cm2 = microsecondsToCentimeters(duration2);
  
-   for(int i=0;i<cm1/30&&i<9;i++){
+   for(int i=0;i<cm1/30&&i<8;i++){
     pixels.setPixelColor(i, pixels.Color(0,150,0)); // Moderately bright green color.
    }
-   for(int i=0;i<cm2/30&&i<9;i++){
+   for(int i=0;i<cm2/30&&i<8;i++){
     pixels.setPixelColor(i+56, pixels.Color(0,150,0)); // Moderately bright green color.
    }
-   for(int i=cm1/30;i<9;i++){
+   for(int i=cm1/30;i<8;i++){
     pixels.setPixelColor(i, pixels.Color(0,0,0)); // Moderately bright green color.
    }
-   for(int i=cm2/30;i<9;i++){
+   for(int i=cm2/30;i<8;i++){
     pixels.setPixelColor(i+56, pixels.Color(0,0,0)); // Moderately bright green color.
    }
-   if (cm1/30<9)pixels.setPixelColor(cm1/30,pixels.Color(0,0,150));
-   if (cm2/30<9)pixels.setPixelColor(cm2/30+56,pixels.Color(0,0,150));
+   if (cm1/30<8)pixels.setPixelColor(cm1/30,pixels.Color(0,0,150));
+   if (cm2/30<8)pixels.setPixelColor(cm2/30+56,pixels.Color(0,0,150));
     pixels.show(); // This sends the updated pixel color to the hardware.
 
     //delay(delayval); // Delay for a period of time (in milliseconds).
@@ -198,7 +198,7 @@ void loop()
   //}
         
        
-        stick='0';
+       
   
   if (mySerial.available()){
   
@@ -215,22 +215,28 @@ void loop()
           mySerial.println('-');
       }
   }
+
+
       digitalWrite(7,1);
       digitalWrite(6,1);
       digitalWrite(5,1);
       digitalWrite(4,1);
-
-
+     stick='0';
 
 
 if (autopilot&&cm1!=0&&cm2!=0){
-  stick='8';
-  if (cm1<50)stick='9';
-  if (cm2<50)stick='7';
-  if (cm1>50 && cm2>50)stick='2';
-  if (cm1>50 && cm2<50)stick='3';
-  if (cm1<50 && cm1>50)stick='1';
+
+    int diff=cm1-cm2;
+   
+    if (cm2<60)stick='7';
+    else if (cm1<60)stick='9';
+    else if (diff>30)stick='3';
+    else if (diff<-30)stick='1';
+    else stick='2';
+  //if (cm1<50 || cm2<50)stick='5';
   }
+
+
         mySerial.print((char)stick);
         mySerial.print("|");
         mySerial.print(cm1);
