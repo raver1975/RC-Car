@@ -227,13 +227,14 @@ void loop()
 if (autopilot&&cm1!=0&&cm2!=0){
 
     int diff=cm1-cm2;
-   
-    if (cm2<60)stick='7';
-    else if (cm1<60)stick='9';
-    else if (diff>30)stick='3';
-    else if (diff<-30)stick='1';
+    if (diff>5)stick='3';
+    else if (diff<-5)stick='1';
     else stick='2';
-  //if (cm1<50 || cm2<50)stick='5';
+    
+   if (cm2<60)stick='7';
+   else if (cm1<60)stick='9';
+   
+  //if (cm1<60 || cm2<10)stick='8';
   }
 
 
