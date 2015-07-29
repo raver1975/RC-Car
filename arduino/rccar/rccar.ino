@@ -29,7 +29,7 @@ const int echoPin2 = 11;
 long duration2, cm2;
 
 int stick='0';
-int dd=150;
+int dd=10;
 boolean flicker=false;
 
 boolean autopilot=true;
@@ -170,7 +170,7 @@ void loop()
   delayMicroseconds(10);
   digitalWrite(trigPin1, LOW);
   pinMode(echoPin1, INPUT);
-  duration1 = pulseIn(echoPin1, HIGH);
+  duration1 = pulseIn(echoPin1, HIGH,50000);
   cm1 = microsecondsToCentimeters(duration1);
 
   pinMode(trigPin2, OUTPUT);
@@ -180,7 +180,7 @@ void loop()
   delayMicroseconds(10);
   digitalWrite(trigPin2, LOW);
   pinMode(echoPin2, INPUT);
-  duration2 = pulseIn(echoPin2, HIGH);
+  duration2 = pulseIn(echoPin2, HIGH,50000);
   cm2 = microsecondsToCentimeters(duration2);
  
    for(int i=0;i<cm1/30&&i<8;i++){
@@ -223,20 +223,20 @@ void loop()
   }
 
 
-       
+//  autopilot-------------------------------------------------------------------------------------------------------------------       
 if (autopilot&&cm1!=0&&cm2!=0){
-
     int diff=cm1-cm2;
-    if (diff>5)stick='3';
-    else if (diff<-5)stick='1';
+    if (diff>25)stick='3';
+    else if (diff<-25)stick='1';
     else stick='2';
     
-if (cm1<40||cm2<40){
+if (cm1<30||cm2<30){
     stick='8';
-  if (diff>5)stick='7';
-    else if (diff<5)stick='9';
+  if (diff>2)stick='9';
+    else if (diff<-2)stick='7s';
   }
-   if (random(10)<3){
+  //  autopilot-------------------------------------------------------------------------------------------------------------------    
+   if ((cm1<80||cm2<80)&&random(10)<2){
     stick='0'+random(10);
     }
   //if (cm1<60 || cm2<60)stick='8';
