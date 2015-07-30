@@ -29,10 +29,11 @@ const int echoPin2 = 11;
 long duration2, cm2;
 
 int stick='0';
-int dd=10;
+int dd=1;
 boolean flicker=false;
 
 boolean autopilot=true;
+boolean backup=false;
 
 void setup()
 {
@@ -182,6 +183,10 @@ void loop()
   pinMode(echoPin2, INPUT);
   duration2 = pulseIn(echoPin2, HIGH,50000);
   cm2 = microsecondsToCentimeters(duration2);
+  Serial.print(cm1);
+  Serial.print(",");
+  Serial.println(cm2);
+  
  
    for(int i=0;i<cm1/30&&i<8;i++){
     pixels.setPixelColor(i, pixels.Color(flicker?150:0,0,flicker?0:150)); // Moderately bright green color.
@@ -224,21 +229,24 @@ void loop()
 
 
 //  autopilot-------------------------------------------------------------------------------------------------------------------       
-if (autopilot&&cm1!=0&&cm2!=0){
+if (autopilot){
     int diff=cm1-cm2;
-    if (diff>25)stick='3';
-    else if (diff<-25)stick='1';
+    if (diff>2&&cm1>150)stick='3';
+    else if (diff<-2&&cm2>150)stick='1';
     else stick='2';
-    
-if (cm1<30||cm2<30){
+    int bb=0;
+    if (cm1<100)bb+=100-cm1;
+    if (cm2<100)bb+=100-cm2;
+    if (bb>0)
+   if (backup||(bb>0&&random(200*100)<bb)){
+    backup=true;
     stick='8';
-  if (diff>2)stick='9';
-    else if (diff<-2)stick='7s';
-  }
-  //  autopilot-------------------------------------------------------------------------------------------------------------------    
-   if ((cm1<80||cm2<80)&&random(10)<2){
-    stick='0'+random(10);
+    if (diff>0)stick='7';
+    else if (diff<-0)stick='9';
+    if (cm1>100||cm2>100){backup=false;}
+if (cm1>100&&cm2>100)stick='2';
     }
+      //  autopilot-------------------------------------------------------------------------------------------------------------------   
   //if (cm1<60 || cm2<60)stick='8';
   }
         mySerial.print((char)stick);
