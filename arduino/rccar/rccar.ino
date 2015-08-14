@@ -33,7 +33,7 @@ const int echoPin3 = 0;
 long duration3, cm3;
 
 int stick = '0';
-int dd = 10;
+int dd = 0;
 boolean flicker = false;
 
 boolean autopilot = true;
@@ -153,7 +153,7 @@ void loop()
   delayMicroseconds(10);
   digitalWrite(trigPin1, LOW);
   pinMode(echoPin1, INPUT);
-  duration1 = pulseIn(echoPin1, HIGH, 50000);
+  duration1 = pulseIn(echoPin1, HIGH, 150000);
   cm1 = microsecondsToCentimeters(duration1);
 
   pinMode(trigPin2, OUTPUT);
@@ -163,7 +163,7 @@ void loop()
   delayMicroseconds(10);
   digitalWrite(trigPin2, LOW);
   pinMode(echoPin2, INPUT);
-  duration2 = pulseIn(echoPin2, HIGH, 50000);
+  duration2 = pulseIn(echoPin2, HIGH, 150000);
   cm2 = microsecondsToCentimeters(duration2);
 
   pinMode(trigPin3, OUTPUT);
@@ -173,7 +173,7 @@ void loop()
   delayMicroseconds(10);
   digitalWrite(trigPin3, LOW);
   pinMode(echoPin3, INPUT);
-  duration3 = pulseIn(echoPin3, HIGH, 50000);
+  duration3 = pulseIn(echoPin3, HIGH, 150000);
   cm3 = microsecondsToCentimeters(duration3);
 
   //Serial.print(cm1);
@@ -240,20 +240,22 @@ void loop()
 
   //  autopilot-------------------------------------------------------------------------------------------------------------------
   if (autopilot) {
-    if (cm3>60)stick='2';
-    if (cm3<60){
-      if (cm1>cm2)stick='3';
-      else stick='1';
+    stick='2';
+   if (cm1>cm2 && cm1>cm3)stick='3';
+   if (cm2>cm1 && cm2>cm3)stick='1';
+   if (cm3>cm1 && cm3>cm2)stick='2';
+   if (cm3>120 && cm1>120 && cm2>120)stick='2';
+   //if (cm1<20||cm2<20||cm3<20)stick='7';
     }
    
     //  autopilot-------------------------------------------------------------------------------------------------------------------
     //if (cm1<60 || cm2<60)stick='8';
-  }
-  mySerial.print((char)stick);
-  mySerial.print("|");
-  mySerial.print(cm1);
-  mySerial.print(",");
-  mySerial.println(cm2);
+  //}
+  //mySerial.print((char)stick);
+  //mySerial.print("|");
+  //mySerial.print(cm1);
+  //mySerial.print(",");
+  //mySerial.println(cm2);
 
   if ((stick >= (int)'0' && stick <= (int)'9')) {
 
@@ -363,6 +365,11 @@ void loop()
       // pixels.setPixelColor(18, pixels.Color(0,150,150));
     }
     delay(dd);
+     // digitalWrite(7, 1);
+     // digitalWrite(6, 1);
+     // digitalWrite(5, 1);
+     // digitalWrite(4, 1);
+     // delay(dd/2);
     //if (flag){stick-=3;flag=false;}
 
   }
